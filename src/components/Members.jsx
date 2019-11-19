@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Header, Li, Ul } from './styles/theme'
-
+import { Header } from './styles/theme'
+import { List, Image, Button } from 'semantic-ui-react'
 
 class Members extends Component {
   state = {
@@ -30,35 +30,49 @@ class Members extends Component {
 
 
   render() {
+    // debugger
+
     let membersList = this.state.members.map(member => {
       return (
-        <Li key={member.sourceid}>
-          <img src={member.bild_url_80} className="avatar" />
-          {`${member.tilltalsnamn} ${member.efternamn}`}
-        </Li>
+        <List.Item key={member.sourceid}>
+          <Image avatar src={member.bild_url_80} />
+          <List.Content>
+            <List.Header as='h3'>{`${member.tilltalsnamn} ${member.efternamn}`}</List.Header>
+            <List.Description>
+              {member.valkrets}
+            </List.Description>
+          </List.Content>
+        </List.Item>
+
+
+
+        // <Li key={member.sourceid}>
+        //   <img src={member.bild_url_80} className="avatar" />
+        //   {`${member.tilltalsnamn} ${member.efternamn}`}
+        // </Li>
       )
     })
     return (
       <>
         <Header liberal>Members of the parliament - Liberal Party</Header>
-        <Ul>
+        <List>
           {membersList}
-        </Ul>
-        <button
+        </List>
+        <Button
           disabled={this.state.filtered}
           onClick={this.filterMembers.bind(this, 'man')}
-        >Filter men</button>
-        <button
+        >Filter men</Button>
+        <Button
           disabled={this.state.filtered}
           onClick={this.filterMembers.bind(this, 'kvinna')}
-        >Filter women</button>
+        >Filter women</Button>
 
-        <button
+        <Button
           onClick={this.fetchMembers.bind(this)}
           disabled={!this.state.filtered}
         >
           Reset
-        </button>
+        </Button>
       </>
     );
   }
