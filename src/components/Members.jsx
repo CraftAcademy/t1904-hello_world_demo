@@ -15,7 +15,7 @@ class Members extends Component {
 
   async fetchMembers() {
     try {
-      let response = await axios.get('http://data.riksdagen.se/personlista/?iid=&fnamn=&enamn=&f_ar=&kn=&parti=L&valkrets=&rdlstatus=&org=&utformat=json&sort=sorteringsnamn&sortorder=asc&termlista=')
+      let response = await axios.get('https://data.riksdagen.se/personlista/?iid=&fnamn=&enamn=&f_ar=&kn=&parti=L&valkrets=&rdlstatus=&org=&utformat=json&sort=sorteringsnamn&sortorder=asc&termlista=')
       this.setState({ members: response.data.personlista.person, filtered: false })
 
     } catch (error) {
